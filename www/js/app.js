@@ -97,19 +97,42 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_module1_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/module1.js */ "./src/js/modules/module1.js");
 /* harmony import */ var _modules_module1_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_module1_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_two_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/two.js */ "./src/js/modules/two.js");
-/* harmony import */ var _modules_two_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_two_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modules_threeOBJ_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/threeOBJ.js */ "./src/js/modules/threeOBJ.js");
+/* harmony import */ var _modules_threeOBJ_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_threeOBJ_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modules_two_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/two.js */ "./src/js/modules/two.js");
+/* harmony import */ var _modules_two_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_two_js__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+
+
 //var module_1 = require('./modules/module1.js');
 //var two_obj = require('./modules/two.js');
+
 //import * as module_1 from './modules/module1.js';
 //import * as two_obj from './modules/two.js';
 
+//import './modules/module1.js';
+//import './modules/two.js';
 
 /* require('./modules/module1.js');
 require('./modules/two.js'); */
 
-module_1.init();
-two_obj.init();
+
+_modules_module1_js__WEBPACK_IMPORTED_MODULE_0___default.a.init();
+_modules_two_js__WEBPACK_IMPORTED_MODULE_2___default.a.init();
+
+_modules_two_js__WEBPACK_IMPORTED_MODULE_2___default.a.pubFunction();
+
+
+console.log(_modules_threeOBJ_js__WEBPACK_IMPORTED_MODULE_1___default.a.someVar);
+
+
+_modules_threeOBJ_js__WEBPACK_IMPORTED_MODULE_1___default.a.someVar = "Chenzo is cool";
+
+
+_modules_two_js__WEBPACK_IMPORTED_MODULE_2___default.a.readNewVar();
 
 /***/ }),
 
@@ -118,29 +141,71 @@ two_obj.init();
   !*** ./src/js/modules/module1.js ***!
   \***********************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+const threeOBJ = __webpack_require__(/*! ./threeOBJ */ "./src/js/modules/threeOBJ.js");
 
 console.log("Module_1");
 
-var module_1 = function () {
-  function privateFunction() {
-    console.log("I'm private");
-  }
+var module_1 = (function(){
 
-  function init() {
-    console.log("initializing");
-    privateFunction();
-  }
+    function privateFunction() {
+        console.log("I'm private");
+    }
 
-  function pubFunction() {
-    console.log("I'm a public function in module_1");
-  }
+    function init() {
+        console.log("initializing");
+        privateFunction();
+        threeOBJ.thing();
+    }
 
-  return {
-    init: init,
-    pubFunction: pubFunction
-  };
-}(); //module_1.init();
+    function pubFunction() {
+        console.log("I'm a public function in module_1");
+    }
+
+    return {
+        init: init,
+        pubFunction: pubFunction
+    };
+
+}());
+
+module.exports = { 
+    init: module_1.init,
+    pubFunction: module_1.pubFunction
+};
+
+//module_1.init();
+
+/***/ }),
+
+/***/ "./src/js/modules/threeOBJ.js":
+/*!************************************!*\
+  !*** ./src/js/modules/threeOBJ.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+threeOBJ = {
+
+    someVar: "Vince was here",
+
+
+    thing: function() {
+        console.log("From Inside threeOBJ - boop");
+    }
+
+}
+
+
+
+module.exports = { 
+    someVar: threeOBJ.someVar,
+    thing: threeOBJ.thing
+};
+
 
 /***/ }),
 
@@ -149,27 +214,47 @@ var module_1 = function () {
   !*** ./src/js/modules/two.js ***!
   \*******************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var two_obj = function () {
-  function privateFunction() {
-    console.log("I'm private in two_obj");
-  }
+const module1 = __webpack_require__(/*! ./module1 */ "./src/js/modules/module1.js");
+const threeOBJ = __webpack_require__(/*! ./threeOBJ */ "./src/js/modules/threeOBJ.js");
 
-  function init() {
-    console.log("two_obj initializing");
-    privateFunction();
-  }
 
-  function pubFunction() {
-    console.log("I'm a public function in two_obj");
-  }
+var two_obj = (function(){
 
-  return {
-    init: init,
-    pubFunction: pubFunction
-  };
-}(); //two_obj.init();
+    function privateFunction() {
+        console.log("I'm private in two_obj");
+    }
+
+    function init() {
+        console.log("two_obj initializing");
+        privateFunction();
+    }
+
+    function pubFunction() {
+        console.log("I'm a public function in two_obj!!");
+        module1.pubFunction();
+    }
+
+    function readNewVar() {
+        console.log(threeOBJ.someVar);
+    }
+
+    return {
+        init: init,
+        pubFunction: pubFunction,
+        readNewVar: readNewVar
+    };
+
+}());
+
+module.exports = { 
+    init: two_obj.init,
+    pubFunction: two_obj.pubFunction,
+    readNewVar: two_obj.readNewVar
+};
+
+//two_obj.init();
 
 /***/ }),
 

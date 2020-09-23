@@ -1,3 +1,5 @@
+const threeOBJ = require("./threeOBJ");
+
 console.log("Module_1");
 
 var module_1 = (function(){
@@ -9,6 +11,7 @@ var module_1 = (function(){
     function init() {
         console.log("initializing");
         privateFunction();
+        threeOBJ.thing();
     }
 
     function pubFunction() {
@@ -21,5 +24,10 @@ var module_1 = (function(){
     };
 
 }());
+
+module.exports = { 
+    init: module_1.init,
+    pubFunction: module_1.pubFunction
+};
 
 //module_1.init();

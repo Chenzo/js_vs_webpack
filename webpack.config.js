@@ -12,7 +12,7 @@ module.exports = {
       {
         test: /\.js?$/,
         include: [path.resolve(__dirname, "./src/js")],
-        loader: "babel-loader"
+        //loader: "babel-loader"
       }
     ]
   }

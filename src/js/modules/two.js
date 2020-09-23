@@ -1,3 +1,5 @@
+const module1 = require("./module1");
+const threeOBJ = require("./threeOBJ");
 
 
 var two_obj = (function(){
@@ -12,14 +14,26 @@ var two_obj = (function(){
     }
 
     function pubFunction() {
-        console.log("I'm a public function in two_obj");
+        console.log("I'm a public function in two_obj!!");
+        module1.pubFunction();
+    }
+
+    function readNewVar() {
+        console.log(threeOBJ.someVar);
     }
 
     return {
         init: init,
-        pubFunction: pubFunction
+        pubFunction: pubFunction,
+        readNewVar: readNewVar
     };
 
 }());
+
+module.exports = { 
+    init: two_obj.init,
+    pubFunction: two_obj.pubFunction,
+    readNewVar: two_obj.readNewVar
+};
 
 //two_obj.init();
