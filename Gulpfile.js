@@ -12,12 +12,7 @@ var gulp = require("gulp"),
     webpackconfig = require(paths.scripts.webpackconffile),
     webpackstream = require("webpack-stream"),
     named = require('vinyl-named'),
-    sourcemaps = require('gulp-sourcemaps'),
-    t2 = require('through2'),
     replace = require('gulp-replace');
-
-    sass.compiler = require('node-sass');
-
 
 
 function scripts() {
@@ -33,7 +28,9 @@ function scripts() {
 
 
 function watch() {
-    browserSync.init();
+    browserSync.init({
+        proxy: 'http://localhost:8088/index.html'
+    });
     gulp.watch(paths.scripts.src + "/**/*.js", scripts);
     gulp.watch(paths.scripts.src + '/**/*.js', bustCache);
     gulp.watch("./www/").on('change', browserSync.reload);
@@ -44,7 +41,7 @@ function bustCache() {
     var timeInMs = Date.now();
     console.log("refreshing cacheBuster with timeStamp: " + timeInMs);
     return gulp 
-        .src(['./www/overlay.html'])
+        .src(['./www/index.html'])
         .pipe(replace(/cache_buster=\d*/g, 'cache_buster=' +  timeInMs))
         .pipe(gulp.dest('./www/'))
 }
@@ -58,3 +55,4 @@ exports.scripts = scripts;
 var build = gulp.parallel(scripts, bustCache, watch);
 
 gulp.task('default', build);
+

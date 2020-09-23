@@ -1,4 +1,4 @@
-
+console.log("Module_1");
 
 var module_1 = (function(){
 
@@ -22,5 +22,4 @@ var module_1 = (function(){
 
 }());
 
-
-module_1.init();
+//module_1.init();

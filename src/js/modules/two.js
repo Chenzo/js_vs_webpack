@@ -22,5 +22,4 @@ var two_obj = (function(){
 
 }());
 
-
-two_obj.init();
+//two_obj.init();
